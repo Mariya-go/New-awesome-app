@@ -1,0 +1,14 @@
+h1 {
+  text-align: center;
+  color: skyblue;
+}
+.centralBloc {
+  margin: 0 auto;
+  color: rgb(29, 120, 156);
+}
+.card {
+  margin: 0 auto;
+}
+.fa-cloud-sun {
+  font-size: 30px;
+}
