@@ -12,3 +12,7 @@ h1 {
 .fa-cloud-sun {
   font-size: 30px;
 }
+.link {
+  margin: 0 auto;
+  color: rgb(29, 120, 156);
+}
