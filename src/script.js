@@ -53,7 +53,6 @@ function handleSubmit(event) {
 }
 
 function showWeather(response) {
-  console.log(response);
   let temp = Math.round(response.data.main.temp);
   let temperature = document.querySelector("#temp");
   temperature.innerHTML = temp;
