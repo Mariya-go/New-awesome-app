@@ -53,6 +53,7 @@ function handleSubmit(event) {
 }
 
 function showWeather(response) {
+  console.log(response.data);
   let temp = Math.round(response.data.main.temp);
   let temperature = document.querySelector("#temp");
   temperature.innerHTML = temp;
@@ -60,6 +61,10 @@ function showWeather(response) {
   city.innerHTML = response.data.name;
   let cloudness = document.querySelector("#cloudness");
   cloudness.innerHTML = response.data.weather[0].description;
+  let windSpeed = document.querySelector("#wind");
+  windSpeed.innerHTML = Math.round(response.data.wind.speed);
+  let humidityLevel = document.querySelector("#humidity-level");
+  humidityLevel.innerHTML = response.data.main.humidity;
 }
 
 function degrees(event) {
