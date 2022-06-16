@@ -58,6 +58,8 @@ function showWeather(response) {
   temperature.innerHTML = temp;
   let city = document.querySelector("#city");
   city.innerHTML = response.data.name;
+  let cloudness = document.querySelector("#cloudness");
+  cloudness.innerHTML = response.data.weather[0].description;
 }
 
 function degrees(event) {

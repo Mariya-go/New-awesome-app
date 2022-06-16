@@ -16,3 +16,6 @@ h1 {
   margin: 0 auto;
   color: rgb(29, 120, 156);
 }
+#cloudness {
+  text-transform: capitalize;
+}
