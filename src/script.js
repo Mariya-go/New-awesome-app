@@ -46,9 +46,6 @@ formatTime(now);
 function handleSubmit(event) {
   event.preventDefault();
   let input = document.querySelector("#input");
-  let city = document.querySelector("#city");
-  city.innerHTML = `${input.value}`;
-
   let apiKey = "957881f4ac9df8a6354696fa2849e81b";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&units=metric`;
 
@@ -56,9 +53,12 @@ function handleSubmit(event) {
 }
 
 function showWeather(response) {
+  console.log(response);
   let temp = Math.round(response.data.main.temp);
   let temperature = document.querySelector("#temp");
   temperature.innerHTML = temp;
+  let city = document.querySelector("#city");
+  city.innerHTML = response.data.name;
 }
 
 function degrees(event) {
@@ -74,13 +74,18 @@ function cels(event) {
   temp.innerHTML = 14;
 }
 
-function currentPosition(position) {
+function searchCurrentPosition(position) {
   let lat = position.coords.latitude;
   let long = position.coords.longitude;
   let apiKey = "957881f4ac9df8a6354696fa2849e81b";
   let apiUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(showWeather);
+}
+
+function currentLokation(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(searchCurrentPosition);
 }
 
 let farenheit = document.querySelector("#farenheit");
@@ -92,7 +97,4 @@ let form = document.querySelector("#form");
 form.addEventListener("submit", handleSubmit);
 
 let current = document.querySelector("#current");
-current.addEventListener(
-  "submit",
-  navigator.geolocation.getCurrentPosition(currentPosition)
-);
+current.addEventListener("click", currentLokation);
