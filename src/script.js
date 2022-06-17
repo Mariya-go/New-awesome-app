@@ -57,6 +57,9 @@ function showWeather(response) {
   let temp = Math.round(response.data.main.temp);
   let temperature = document.querySelector("#temp");
   temperature.innerHTML = temp;
+
+  celsiusTemp = Math.round(response.data.main.temp);
+
   let city = document.querySelector("#city");
   city.innerHTML = response.data.name;
   let cloudness = document.querySelector("#cloudness");
@@ -67,17 +70,29 @@ function showWeather(response) {
   humidityLevel.innerHTML = response.data.main.humidity;
 }
 
-function degrees(event) {
+//function degrees(event) {
+//event.preventDefault();
+// let temp = document.querySelector("#temp");
+//let temper = temp.innerHTML;
+// temper = Number(temper);
+
+//}
+
+function fahrenheitTemp(event) {
   event.preventDefault();
+  let fardegree = Math.round((celsiusTemp * 9) / 5 + 32);
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
   let temp = document.querySelector("#temp");
-  let temper = temp.innerHTML;
-  temper = Number(temper);
-  let fardegree = Math.round((temper * 9) / 5 + 32);
   temp.innerHTML = `${fardegree}`;
 }
-function cels(event) {
+
+function celsiusTemper(event) {
   event.preventDefault();
-  temp.innerHTML = 14;
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  let temp = document.querySelector("#temp");
+  temp.innerHTML = celsiusTemp;
 }
 
 function searchCurrentPosition(position) {
@@ -94,10 +109,12 @@ function currentLokation(event) {
   navigator.geolocation.getCurrentPosition(searchCurrentPosition);
 }
 
-let farenheit = document.querySelector("#farenheit");
-farenheit.addEventListener("click", degrees);
-let celsius = document.querySelector("#celsius");
-celsius.addEventListener("click", cels);
+let celsiusTemp = null;
+
+let fahrenheitLink = document.querySelector("#fahrenheit");
+fahrenheitLink.addEventListener("click", fahrenheitTemp);
+let celsiusLink = document.querySelector("#celsius");
+celsiusLink.addEventListener("click", celsiusTemper);
 
 let form = document.querySelector("#form");
 form.addEventListener("submit", handleSubmit);

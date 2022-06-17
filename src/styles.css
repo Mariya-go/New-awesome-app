@@ -19,3 +19,8 @@ h1 {
 #cloudness {
   text-transform: capitalize;
 }
+.active {
+  color: rgb(29, 120, 156);
+  cursor: default;
+  text-decoration: none;
+}
