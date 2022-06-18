@@ -68,6 +68,12 @@ function showWeather(response) {
   windSpeed.innerHTML = Math.round(response.data.wind.speed);
   let humidityLevel = document.querySelector("#humidity-level");
   humidityLevel.innerHTML = response.data.main.humidity;
+  let iconElement = document.querySelector("#weatherPic");
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 //function degrees(event) {

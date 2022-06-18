@@ -16,11 +16,22 @@ h1 {
   margin: 0 auto;
   color: rgb(29, 120, 156);
 }
-#cloudness {
-  text-transform: capitalize;
+.units {
+  position: relative;
+  top: -15px;
 }
 .active {
   color: rgb(29, 120, 156);
   cursor: default;
   text-decoration: none;
+}
+#temp {
+  font-size: 35px;
+}
+
+#cloudness {
+  text-transform: capitalize;
+}
+#time {
+  font-size: 35px;
 }
