@@ -43,6 +43,38 @@ function formatTime(formTime) {
 }
 formatTime(now);
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuisday",
+    "Wednesday",
+    "Thersday",
+    "Friday",
+    "Saturday",
+  ];
+
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+   <div class="col-4">
+                ${day}
+              </div>
+              <div class="col-4">
+                <img src="https://cdn-icons-png.flaticon.com/512/1163/1163634.png" alt="weatherPicture" id="weatherPic" height="30px"> 
+              </div>
+              <div class="col-4">
+                11° - 7°
+              </div>
+  `;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function handleSubmit(event) {
   event.preventDefault();
   let input = document.querySelector("#input");
@@ -75,14 +107,6 @@ function showWeather(response) {
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
-
-//function degrees(event) {
-//event.preventDefault();
-// let temp = document.querySelector("#temp");
-//let temper = temp.innerHTML;
-// temper = Number(temper);
-
-//}
 
 function fahrenheitTemp(event) {
   event.preventDefault();
@@ -127,3 +151,5 @@ form.addEventListener("submit", handleSubmit);
 
 let current = document.querySelector("#current");
 current.addEventListener("click", currentLokation);
+
+displayForecast();
