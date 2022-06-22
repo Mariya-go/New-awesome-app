@@ -49,7 +49,7 @@ function displayForecast() {
   let days = [
     "Sunday",
     "Monday",
-    "Tuisday",
+    "Tuesday",
     "Wednesday",
     "Thersday",
     "Friday",
@@ -84,6 +84,14 @@ function handleSubmit(event) {
   axios.get(`${apiUrl}&appid=${apiKey}`).then(showWeather);
 }
 
+function getForecast(coordinats) {
+  console.log(coordinats);
+  let apiKey = "957881f4ac9df8a6354696fa2849e81b";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinats.lat}&lon=${coordinats.lon}&appid=${apiKey}&units=metric`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function showWeather(response) {
   console.log(response.data);
   let temp = Math.round(response.data.main.temp);
@@ -106,6 +114,8 @@ function showWeather(response) {
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  getForecast(response.data.coord);
 }
 
 function fahrenheitTemp(event) {
@@ -130,7 +140,7 @@ function searchCurrentPosition(position) {
   let long = position.coords.longitude;
   let apiKey = "957881f4ac9df8a6354696fa2849e81b";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`;
-
+  console.log(apiUrl);
   axios.get(apiUrl).then(showWeather);
 }
 
