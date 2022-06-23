@@ -4,10 +4,10 @@ let now = new Date();
 function formatDate(formDate) {
   let date = formDate.getDate();
   let week = [
-    "Sonday",
+    "Sunday",
     "Monday",
     "Tuesday",
-    "Wednesdasy",
+    "Wednesday",
     "Thursday",
     "Friday",
     "Saturday",
@@ -43,33 +43,49 @@ function formatTime(formTime) {
 }
 formatTime(now);
 
-function displayForecast() {
-  let forecastElement = document.querySelector("#forecast");
-  let forecastHTML = `<div class="row">`;
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
   let days = [
     "Sunday",
     "Monday",
     "Tuesday",
     "Wednesday",
-    "Thersday",
+    "Thursday",
     "Friday",
     "Saturday",
   ];
 
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+  return days[day];
+}
+
+function displayForecast(response) {
+  console.log(response.data.daily);
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 7) {
+      forecastHTML =
+        forecastHTML +
+        `
    <div class="col-4">
-                ${day}
+                ${formatDay(forecastDay.dt)}
               </div>
               <div class="col-4">
-                <img src="https://cdn-icons-png.flaticon.com/512/1163/1163634.png" alt="weatherPicture" id="weatherPic" height="30px"> 
+              
+                <img src="https://openweathermap.org/img/wn/${
+                  forecastDay.weather[0].icon
+                }@2x.png" alt="weatherPicture" id="weatherPic" height="30px"> 
               </div>
               <div class="col-4">
-                11° - 7°
+                ${Math.round(forecastDay.temp.max)}° - ${Math.round(
+          forecastDay.temp.min
+        )}°
               </div>
   `;
+    }
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
@@ -85,15 +101,13 @@ function handleSubmit(event) {
 }
 
 function getForecast(coordinats) {
-  console.log(coordinats);
   let apiKey = "957881f4ac9df8a6354696fa2849e81b";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinats.lat}&lon=${coordinats.lon}&appid=${apiKey}&units=metric`;
-  console.log(apiUrl);
+
   axios.get(apiUrl).then(displayForecast);
 }
 
 function showWeather(response) {
-  console.log(response.data);
   let temp = Math.round(response.data.main.temp);
   let temperature = document.querySelector("#temp");
   temperature.innerHTML = temp;
@@ -161,5 +175,3 @@ form.addEventListener("submit", handleSubmit);
 
 let current = document.querySelector("#current");
 current.addEventListener("click", currentLokation);
-
-displayForecast();
