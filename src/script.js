@@ -37,7 +37,13 @@ formatDate(now);
 
 function formatTime(formTime) {
   let minutes = formTime.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
   let hours = formTime.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
   let timeOutput = document.querySelector("#time");
   timeOutput.innerHTML = `${hours} : ${minutes}`;
 }
